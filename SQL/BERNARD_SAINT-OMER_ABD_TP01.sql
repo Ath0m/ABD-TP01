@@ -11,7 +11,7 @@ WHERE f.fid = r.fid AND a.aid = r.aid;
 
 --- Question 2
 
-SELECT anom, nationalite
+SELECT anom
 FROM artists
 WHERE nationalite LIKE 'francais' OR nationalite LIKE 'italien';
 
