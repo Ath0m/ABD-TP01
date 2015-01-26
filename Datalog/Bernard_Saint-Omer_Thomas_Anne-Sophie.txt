@@ -1,0 +1,60 @@
+
+--- ABD - TP 01
+
+--- Exercice 2 : Requêtes Datalog
+
+--- Question 1
+
+answer(N,T) :-
+	films(F,T,_,_,_),
+	artists(A,N,_),
+	roles(F,A,_,_).$
+
+--- Question 2
+
+answer(NOM1) :-
+	artists(_,NOM1,'italien').
+answer(NOM2) :-
+	artists(_,NOM2,'francais').$
+
+--- Question 3
+
+answer(T) :-
+	films(F,T,_,_,L),
+	artists(A,_,L),
+	roles(F,A,_,_).$
+
+--- Question 4
+
+answer(F) :-
+	A<>B, artists(A,_,'francais'), artists(B,_,'francais'), roles(F,A,_,_), roles(F,B,_,_).$
+
+--- Question 5
+
+answer(F) :-
+	A=B, artists(A,_,'francais'), artists(B,_,'francais'), roles(F,A,_,_), roles(F,B,_,_).$
+
+--- Question 6
+
+temp1(F) :-
+	roles(F,A,_,_), artists(A,_,'francais').
+answer(F) :-
+	roles(F,_,_,_), not temp1(F).$
+
+--- Question 7
+
+temp2(F) :-
+	roles(F,A,_,_), not artists(A,_,'francais').
+answer(T,R) :-
+	films(F,T,R,_,_), not temp2(F).$
+
+--- Question 8
+
+answer(A) :-
+	roles(F1,A,_,_), roles(F2,A,_,_), F1 <> F2.$
+
+--- Question 9
+
+answer(N) :-
+	roles(F1,A,'Cyrano',_), films(F2,_,_,_,_), not roles(F2,A,_,_), artists(A,N,_).$
+
